@@ -91,7 +91,7 @@ const SignupForm = () => {
                     Create a new account
                 </h2>
                 <p className="text-light-3 small-medium md:base-regular mt-2">
-                    To use snapgram, please enter your account details
+                    To use snapdrop, please enter your account details
                 </p>
                 <form
                     onSubmit={form.handleSubmit(onSubmit)}
