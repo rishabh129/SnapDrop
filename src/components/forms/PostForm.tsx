@@ -3,7 +3,7 @@ import { Models } from "appwrite";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Storage, ID } from 'appwrite';
+import { ID } from 'appwrite';
 
 import {
     Form,
@@ -102,7 +102,7 @@ const PostForm = ({ post, action }: PostFormProps) => {
             if (post && action === "Update") {
                 const updatedPost = await updatePost({
                     ...value,
-                    imageUrl: fileUrl || post.imageUrl,
+                    image: fileUrl || post.imageUrl,
                     postId: "",
                     imageId: ""
                 });
@@ -118,7 +118,7 @@ const PostForm = ({ post, action }: PostFormProps) => {
             // ACTION = CREATE
             const newPost = await createPost({
                 ...value,
-                imageUrl: fileUrl,  // Add the file URL to the document
+                image: fileUrl,  // Add the file URL to the document
                 userId: user.id,
             });
 

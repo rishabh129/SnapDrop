@@ -12,6 +12,7 @@ import { useToast } from "@/components/ui/use-toast";
 import { useCreateUserAccount, useSignInAccount } from "@/lib/react-query/queries";
 import { SignupValidation } from "@/lib/validation";
 import { useUserContext } from "@/context/AuthContext";
+import { account } from "@/lib/appwrite/config";
 
 const SignupForm = () => {
     const { toast } = useToast();
@@ -43,6 +44,7 @@ const SignupForm = () => {
                 return;
             }
 
+
             const session = await signInAccount({
                 email: user.email,
                 password: user.password,
@@ -55,6 +57,11 @@ const SignupForm = () => {
 
                 return;
             }
+
+            // Step 3: Send Verification Email
+            // await account.createVerification('https://www.rishabhshankar.tech/');  // Send the verification email
+
+            // toast({ title: "Verification email sent. Please check your inbox." });
 
             const isLoggedIn = await checkAuthUser();
 
