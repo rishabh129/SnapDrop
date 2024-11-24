@@ -18,7 +18,7 @@ const GridUsersList = ({ creators }: GridUsersListProps) => {
                     <img
                         className="h-14 w-14 rounded-full"
                         alt="profile"
-                        src={creator.imageUrl || "/assets/icons/profile-placeholder.svg"}
+                        src={creator.image || "/assets/icons/profile-placeholder.svg"}
                     />
                     <p className="body-bold">{creator.name}</p>
                     <Button

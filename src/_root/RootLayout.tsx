@@ -1,10 +1,10 @@
-import Bottombar from "@/components/shared/Bottombar";
-import LeftSidebar from "@/components/shared/LeftSidebar";
-import RightSidebar from "@/components/shared/RightSidebar";
-import Topbar from "@/components/shared/Topbar";
 import { Outlet } from "react-router-dom";
 
-const Home = () => {
+import Topbar from "@/components/shared/Topbar";
+import Bottombar from "@/components/shared/Bottombar";
+import LeftSidebar from "@/components/shared/LeftSidebar";
+
+const RootLayout = () => {
     return (
         <div className="w-full md:flex">
             <Topbar />
@@ -14,11 +14,9 @@ const Home = () => {
                 <Outlet />
             </section>
 
-            <RightSidebar />
-
             <Bottombar />
         </div>
     );
 };
 
-export default Home;
+export default RootLayout;

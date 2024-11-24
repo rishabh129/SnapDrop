@@ -9,7 +9,7 @@ export const INITIAL_USER = {
     name: "",
     username: "",
     email: "",
-    imageUrl: "",
+    image: "",
     bio: "",
 };
 
@@ -49,7 +49,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
                     name: currentAccount.name,
                     username: currentAccount.username,
                     email: currentAccount.email,
-                    imageUrl: currentAccount.imageUrl,
+                    image: currentAccount.image,
                     bio: currentAccount.bio,
                 });
                 setIsAuthenticated(true);
@@ -90,7 +90,5 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
     return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
-
-export default AuthProvider;
 
 export const useUserContext = () => useContext(AuthContext);

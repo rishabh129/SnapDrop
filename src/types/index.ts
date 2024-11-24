@@ -9,7 +9,7 @@ export type IUpdateUser = {
     name: string;
     bio: string;
     imageId: string;
-    imageUrl: URL | string;
+    image: URL | string;
     file: File[];
 };
 
@@ -19,13 +19,14 @@ export type INewPost = {
     file: File[];
     location?: string;
     tags?: string;
+    image?: string;
 };
 
 export type IUpdatePost = {
     postId: string;
     caption: string;
     imageId: string;
-    imageUrl: URL;
+    image: URL;
     file: File[];
     location?: string;
     tags?: string;
@@ -36,7 +37,7 @@ export type IUser = {
     name: string;
     username: string;
     email: string;
-    imageUrl: string;
+    image: string;
     bio: string;
 };
 

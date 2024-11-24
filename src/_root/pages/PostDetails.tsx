@@ -1,25 +1,23 @@
 import { useParams, Link, useNavigate } from "react-router-dom";
 
-import { Button } from "@/components/ui/button";
-import Loader from "@/components/shared/Loader";
-import GridPostList from "@/components/shared/GridPostList";
-import PostStats from "@/components/shared/PostStats";
+import { Button } from "@/components/ui";
+import { Loader } from "@/components/shared";
+import { GridPostList, PostStats } from "@/components/shared";
 
 import {
     useGetPostById,
     useGetUserPosts,
     useDeletePost,
-} from "@/lib/react-query/queriesAndMutations";
+} from "@/lib/react-query/queries";
 import { multiFormatDateString } from "@/lib/utils";
 import { useUserContext } from "@/context/AuthContext";
-import { toast } from "@/components/ui/use-toast";
 
 const PostDetails = () => {
     const navigate = useNavigate();
     const { id } = useParams();
     const { user } = useUserContext();
 
-    const { data: post, isLoading } = useGetPostById(id || "");
+    const { data: post, isLoading } = useGetPostById(id);
     const { data: userPosts, isLoading: isUserPostLoading } = useGetUserPosts(
         post?.creator.$id
     );
@@ -30,9 +28,7 @@ const PostDetails = () => {
     );
 
     const handleDeletePost = () => {
-        toast({ title: "Yet to be implemented!" });
-        return;
-        deletePost({ postId: id || "", imageId: post?.imageId });
+        deletePost({ postId: id, imageId: post?.imageId });
         navigate(-1);
     };
 
@@ -58,7 +54,7 @@ const PostDetails = () => {
             ) : (
                 <div className="post_details-card">
                     <img
-                        src={post?.imageUrl}
+                        src={post?.image}
                         alt="creator"
                         className="post_details-img"
                     />
@@ -70,7 +66,7 @@ const PostDetails = () => {
                                 className="flex items-center gap-3">
                                 <img
                                     src={
-                                        post?.creator.imageUrl ||
+                                        post?.creator.image ||
                                         "/assets/icons/profile-placeholder.svg"
                                     }
                                     alt="creator"

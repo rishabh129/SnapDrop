@@ -1,30 +1,33 @@
-import GridUsersList from "@/components/shared/GridUsersList";
-import { Skeleton } from "@/components/ui/skeleton";
-import { useGetTopCreators } from "@/lib/react-query/queriesAndMutations";
+import { useToast } from "@/components/ui/use-toast";
+import { Loader, UserCard } from "@/components/shared";
+import { useGetUsers } from "@/lib/react-query/queries";
 
 const AllUsers = () => {
-    const { data: creators, isPending: isCreatorsLoading } = useGetTopCreators();
+    const { toast } = useToast();
 
-    if (isCreatorsLoading) {
-        return (
-            <div className="rightsidebar custom-scrollbar">
-                <div className="w-full flex items-start mb-10">
-                    <Skeleton className="w-1/2 py-3 bg-slate-600" />
-                </div>
+    const { data: creators, isLoading, isError: isErrorCreators } = useGetUsers();
 
-                <div className="grid xl:grid-cols-2 lg:grid-cols-1 gap-4">
-                    {Array.from({ length: 7 }, (_, index) => (
-                        <Skeleton key={index} className="h-40 w-52 bg-slate-500"></Skeleton>
-                    ))}
-                </div>
-            </div>
-        );
+    if (isErrorCreators) {
+        toast({ title: "Something went wrong." });
+
+        return;
     }
+
     return (
-        <div className="users-container">
-            <div className="users-inner_container">
-                <h2 className="h3-bold md:h2-bold w-full">All Users</h2>
-                <GridUsersList creators={creators} />
+        <div className="common-container">
+            <div className="user-container">
+                <h2 className="h3-bold md:h2-bold text-left w-full">All Users</h2>
+                {isLoading && !creators ? (
+                    <Loader />
+                ) : (
+                    <ul className="user-grid">
+                        {creators?.documents.map((creator) => (
+                            <li key={creator?.$id} className="flex-1 min-w-[200px] w-full  ">
+                                <UserCard user={creator} />
+                            </li>
+                        ))}
+                    </ul>
+                )}
             </div>
         </div>
     );
